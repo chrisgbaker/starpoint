@@ -4,7 +4,8 @@
   "description": "A test project for the starpoint website",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "build": "node ./node_modules/webpack/bin/webpack --config webpack.debug.config.js --bail"
   },
   "repository": {
     "type": "git",
@@ -14,14 +15,29 @@
     "starpoint",
     "brewing"
   ],
-  "author": "Chris Baker",
+  "author": "Chris Baker <chris@starpointbrewing.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/chrisgbaker/starpoint/issues"
   },
   "homepage": "https://github.com/chrisgbaker/starpoint#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/react": "^0.14.39",
+    "@types/react-dom": "^0.14.17",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
   "devDependencies": {
+    "autoprefixer": "^6.5.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-2": "^6.17.0",
+    "cross-env": "^3.1.1",
+    "css-loader": "^0.25.0",
     "eslint": "^3.7.1",
     "eslint-config-standard": "^6.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
@@ -29,6 +45,25 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.3.0",
     "eslint-plugin-standard": "^2.0.1",
-    "typescript": "^2.0.3"
+    "eventsource-polyfill": "^0.9.6",
+    "file-loader": "^0.9.0",
+    "json-loader": "^0.5.4",
+    "node-sass": "^3.10.1",
+    "postcss-loader": "^0.13.0",
+    "react-dom": "^15.3.2",
+    "react-interval": "^1.3.3",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dispatch": "^2.2.0",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-filter-actions": "^1.2.0",
+    "redux-devtools-log-monitor": "^1.0.11",
+    "sass-loader": "^4.0.2",
+    "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^0.8.2",
+    "typescript": "^2.0.3",
+    "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.8.3",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }
