@@ -10,7 +10,7 @@ module.exports = {
       'eventsource-polyfill', // necessary for hot reloading with IE
       'webpack-hot-middleware/client',
       'babel-polyfill', // Polyfill to create ES6 browser env
-      './src/index'
+      './src/index.tsx'
     ]
   },
   output: {
@@ -37,17 +37,17 @@ module.exports = {
     loaders: [
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
       {
-        test: /\.tsx?$/,
-        loader: 'ts-loader'
-      }, {
         test: /\.js$/,
         loader: 'babel',
         query: {
-          presets: ['react-hmre']
+          presets: [ 'es2015', 'react', 'react-hmre' ]
         },
         include: [
           path.resolve(__dirname, 'src')
         ]
+      }, {
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
       }, {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!postcss-loader!sass-loader'

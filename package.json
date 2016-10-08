@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
-    "build": "node ./node_modules/webpack/bin/webpack --config webpack.debug.config.js --bail"
+    "build": "rimraf dist && node ./node_modules/webpack/bin/webpack --config webpack.release.config.js --bail --progress --profile --colors",
+    "start": "node server"
   },
   "repository": {
     "type": "git",
