@@ -22,7 +22,7 @@ module.exports = {
         drop_console: true
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
