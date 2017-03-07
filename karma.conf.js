@@ -7,9 +7,8 @@ module.exports = function (config) {
     files: [
       'test/**/*-test.ts'
     ],
-    exclude: [],
     preprocessors: {
-      'test/**/*.ts': ['webpack', 'coverage']
+      'test/**/*.ts': ['webpack']
     },
     webpack: {
       module: webpackConfig.module,
