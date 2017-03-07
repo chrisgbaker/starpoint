@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path')
 const webpack = require('webpack')
 const packageJson = require('./package.json')
@@ -19,51 +21,62 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.LoaderOptionsPlugin(
+      { 
+        options: { 
+          postcss: [autoprefixer({ browsers: ['last 2 versions'] })] 
+        } 
+      })
   ],
   resolve: {
-    root: path.resolve('./src'),
+    modules: [path.resolve('./src'),'node_modules'],
     alias: {
       'app.js': 'app.debug.js', // Includes devtools
       'theme.scss': 'styles/theme.scss'
     },
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
-    modulesDirectories: ['node_modules']
+    extensions: ['.ts', '.tsx', '.js']
   },
   devtool: 'cheap-module-eval-source-map',
   module: {
-    loaders: [
-      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+    rules:[
       {
+          // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+        enforce: 'pre',
         test: /\.js$/,
-        loader: 'babel',
-        query: {
-          presets: [ 'es2015', 'react', 'react-hmre' ]
-        },
-        include: [
-          path.resolve(__dirname, 'src')
+        loader: 'source-map-loader'
+      }, {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'ts-loader'
+          }
         ]
       }, {
-        test: /\.tsx?$/,
-        loader: 'ts-loader'
-      }, {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+          }
+        ]
+      }, { 
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader'
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
       }, {
-        test: /\.(jpg)|(gif)|(png)$/,
-        loader: 'file'
-      }, {
-        test: /\.json$/,
-        loader: 'json'
+         test: /\.(jpg)|(gif)|(png)$/,
+         loader: 'file-loader'
       }
-    ],
-    preLoaders: [
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { test: /\.js$/, loader: 'source-map-loader' }
     ]
-  },
-  postcss: () =>
-    [autoprefixer({ browsers: ['last 2 versions'] })]
+  }
 }
