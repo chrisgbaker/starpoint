@@ -15,6 +15,6 @@ const routes = (
 	</Route>
 );
 
-const Routing = () => <Router history={ history } routes={ routes } />;
+const Routing = () : JSX.Element => <Router history={ history } routes={ routes } />;
 
 export default Routing;
