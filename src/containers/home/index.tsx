@@ -1,12 +1,13 @@
 import * as React from 'react'
 
-export interface HomeProps { message?: string; }
+export interface IHomeProps { message?: string; }
 
-export default class HomeComponent extends React.Component<HomeProps, undefined> {
+export default class HomeComponent extends React.Component<IHomeProps, undefined> {
   constructor (props:any) {
     super(props)
   }
   render () {
-    return <div>{this.props.message? this.props.message : 'hi'}</div>
+    const { message = 'hi.' } = this.props; 
+    return <div>{ message }</div>
   }
 }

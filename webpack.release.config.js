@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const path = require('path')
 const webpack = require('webpack')
@@ -26,24 +26,25 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: JSON.stringify('production')
       }
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.LoaderOptionsPlugin(
-      { 
-        options: { 
-          postcss: [autoprefixer({ browsers: ['last 2 versions'] })] 
-        } 
+      {
+        options: {
+          postcss: [autoprefixer({ browsers: ['last 2 versions'] })]
+        }
       })
   ],
   resolve: {
-    modules: [path.resolve('./src'),'node_modules'],
+    modules: [path.resolve('./src'), 'node_modules'],
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: ['.ts', '.tsx', '.js']
   },
+  devtool: false,
   module: {
-     rules:[
+    rules: [
       {
           // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
         enforce: 'pre',
@@ -54,7 +55,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: 'babel-loader'
           }, {
             loader: 'ts-loader'
           }
@@ -64,10 +65,10 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: 'babel-loader'
           }
         ]
-      }, { 
+      }, {
         test: /\.scss$/,
         use: [
           'style-loader',
@@ -76,10 +77,9 @@ module.exports = {
           'sass-loader'
         ]
       }, {
-         test: /\.(jpg)|(gif)|(png)$/,
-         loader: 'file-loader'
+        test: /\.(jpg)|(gif)|(png)$/,
+        loader: 'file-loader'
       }
     ]
   }
 }
-
