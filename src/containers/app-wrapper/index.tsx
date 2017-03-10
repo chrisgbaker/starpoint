@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 const AppWrapper = (routerAndChildren: any) => {
     return (
         <div id="app-wrapper">

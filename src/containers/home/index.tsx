@@ -1,13 +1,22 @@
 import * as React from 'react'
+import { connect } from 'react-redux';
 
-export interface IHomeProps { message?: string; }
+export interface IHomeProps { message: string; }
 
-export default class HomeComponent extends React.Component<IHomeProps, undefined> {
-  constructor (props:any) {
+const matchStateToProps = (state: any): any => ({
+  message: state.get('home', 'data')
+});
+
+class HomeComponent extends React.Component<IHomeProps, any> {
+  constructor(props: any) {
     super(props)
   }
-  render () {
-    const { message = 'hi.' } = this.props; 
-    return <div>{ message }</div>
+  render() {
+    return <div>{this.props.message}</div>
   }
 }
+
+
+const connectedComponent = connect(matchStateToProps)(HomeComponent);
+
+export default connectedComponent;
