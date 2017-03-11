@@ -1,8 +1,8 @@
 import Action from '../interfaces';
 
-export type FETCH = 'data-models/home/fetch';
-export const FETCH: FETCH = 'data-models/home/fetch';
-export type FetchAction = Action<FETCH, boolean>;
+export type FETCHING = 'data-models/home/fetching';
+export const FETCHING: FETCHING = 'data-models/home/fetching';
+export type FetchingAction = Action<FETCHING, boolean>;
 
 export type SYNC = 'data-models/home/sync';
 export const SYNC: SYNC = 'data-models/home/sync';

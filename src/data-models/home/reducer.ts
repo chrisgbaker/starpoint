@@ -1,7 +1,8 @@
 import * as Immutable from 'immutable';
 import * as actionTypes from './action-types';
 
-type HomeAction = actionTypes.FetchAction | actionTypes.SyncAction; //add other actiontypes separated by a pipe as necessary
+//add other actiontypes separated by a pipe as necessary
+type HomeAction = actionTypes.FetchingAction | actionTypes.SyncAction; 
 
 const initialState =
 	Immutable.Map({
@@ -9,11 +10,12 @@ const initialState =
 		data: null,
 	});
 
-function reducer(state: Immutable.Map<string, boolean> = initialState, action: HomeAction) {
+export default function(state: Immutable.Map<string, any> = initialState,
+ action: HomeAction) : Immutable.Map<string, any> {
 	switch (action.type) {
-		case actionTypes.FETCH:
+		case actionTypes.FETCHING:
 			return state.set('fetching', action.payload);
-		case actionTypes.FETCH:
+		case actionTypes.SYNC:
 			return state.merge({
 				fetching: false,
 				data: action.payload,
@@ -22,5 +24,3 @@ function reducer(state: Immutable.Map<string, boolean> = initialState, action: H
 	}
 
 }
-
-export default reducer;
