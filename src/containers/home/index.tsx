@@ -1,15 +1,11 @@
 import * as React from 'react'
 import { connect } from 'react-redux';
-import { List } from 'immutable'
 
 import { actions as homeActions } from '../../data-models/home'
-import { Post } from '../../data-models/interfaces'
+import { HomeProperties, Post } from '../../types'
 
-interface HomeProperties {
-  isLoading: boolean;
-  home_posts: Post[];
-  fetchHomepage(fetching: boolean): void;
-}
+import PostCarousel from '../../components/post-carousel'
+import Spinner from '../../components/spinner'
 
 const matchStateToProps = (state: any): any => ({
   isLoading: state.getIn(['home', 'fetching']),
@@ -17,31 +13,29 @@ const matchStateToProps = (state: any): any => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  fetchHomepage: (fetching: boolean) => dispatch(homeActions.requestHome()),
+  fetchHomepage: () => dispatch(homeActions.requestHome()),
 });
-
-const iterateOverPosts = (post: Post, index: number) => {
-  return (<div key={index}>
-    <h1>{post.title}</h1>
-    <div>{post.content}</div>
-  </div>)
-};
 
 class HomeComponent extends React.Component<HomeProperties, any> {
   constructor(props: any) {
     super(props)
   }
   componentWillMount() {
-    this.props.fetchHomepage(true);
+    this.props.fetchHomepage();
   }
   render() {
-    const { isLoading, home_posts } = this.props;
-    debugger;
+    const { isLoading } = this.props;
     if (isLoading === null || isLoading) {
-      return <div>loading...</div>
+      return <Spinner text={'loading'}/>
     }
 
-    return <div>{home_posts.map(iterateOverPosts)}</div>
+    const posts = this.props.home_posts.toJS() as Post[]; //try to get away from .toJS. also the "as" is not necessary
+    
+    return (
+      <div>
+        <PostCarousel posts={posts}/>
+      </div>
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import * as fetch from 'isomorphic-fetch'
-import { Post } from '../interfaces'
+import { Post } from '../../types'
 import * as actionTypes from './action-types';
 import { BASE_URL } from '../api-constants'
 
@@ -32,10 +32,9 @@ export function requestHome() {
 		return new Promise((resolve, reject) => {
 			return fetch(`${BASE_URL}/posts/`)
 				.then((resp: Response) => resp.ok ? resp.json() : reject(resp))
-				.then((posts: Post[]) => {
-					dispatch(sync(posts));
-				})
+				.then((posts: Post[]) => dispatch(sync(posts)))
 				.catch((e) => {
+					reject(new Error(e));
 					// an error handler for all .then(...) callbacks
 					// http://stackoverflow.com/questions/24662289/when-is-thensuccess-fail-considered-an-antipattern-for-promises
 				});

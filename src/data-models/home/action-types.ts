@@ -1,4 +1,4 @@
-import Action, { Post } from '../interfaces';
+import Action, { Post } from '../../types';
 
 export type FETCHING = 'home/fetching';
 export const FETCHING: FETCHING = 'home/fetching';
