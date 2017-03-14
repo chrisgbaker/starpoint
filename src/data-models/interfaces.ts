@@ -6,3 +6,11 @@ interface Action<P, S> {
 }
 
 export default Action;
+
+
+export interface Post {
+  title: string;
+  content: {
+    rendered: string
+  };
+}

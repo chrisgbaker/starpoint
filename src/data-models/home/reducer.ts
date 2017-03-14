@@ -6,8 +6,8 @@ type HomeAction = actionTypes.FetchingAction | actionTypes.SyncAction;
 
 const initialState =
 	Immutable.Map({
-		fetching: false,
-		data: null,
+		fetching: null,
+		posts: null,
 	});
 
 export default function(state: Immutable.Map<string, any> = initialState,
@@ -18,7 +18,7 @@ export default function(state: Immutable.Map<string, any> = initialState,
 		case actionTypes.SYNC:
 			return state.merge({
 				fetching: false,
-				data: action.payload,
+				posts: action.payload,
 			});
 		default: return state;
 	}
