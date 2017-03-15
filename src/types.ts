@@ -13,7 +13,7 @@ export interface Post {
 
 export interface HomeProperties {
   isLoading: number;
-  home_posts: ImmutableMap<Post[]>;
+  postsMap: ImmutableMap<Post>;
   fetchHomepage(): void;
 }
 

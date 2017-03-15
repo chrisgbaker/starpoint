@@ -17,8 +17,9 @@ function sync(value: Post[]): actionTypes.SyncAction {
 	};
 }
 
-// //need to figure out async await w/ redux. but this does the same as below
+// need to figure out async await w/ redux middleware. but this does the same as below
 // export async function requestHome() {
+// dispatch(fetching(true));
 // 	return async (dispatch: Function) => {
 // 		let request = await fetch(`${BASE_URL}/posts/`);
 // 		let response = <Promise<Post[]>> await request.json();
@@ -32,7 +33,7 @@ export function requestHome() {
 		return new Promise((resolve, reject) => {
 			return fetch(`${BASE_URL}/posts/`)
 				.then((resp: Response) => resp.ok ? resp.json() : reject(resp))
-				.then((posts: Post[]) => dispatch(sync(posts)))
+				.then((posts: Post[]) => dispatch(sync(posts)) && resolve(this))
 				.catch((e) => {
 					reject(new Error(e));
 					// an error handler for all .then(...) callbacks

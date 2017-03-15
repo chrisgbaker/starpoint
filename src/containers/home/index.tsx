@@ -7,19 +7,20 @@ import { HomeProperties, Post } from '../../types'
 import PostCarousel from '../../components/post-carousel'
 import Spinner from '../../components/spinner'
 
-const matchStateToProps = (state: any): any => ({
+const mapStateToProps = (state: any): any => ({
   isLoading: state.getIn(['home', 'fetching']),
-  home_posts: state.getIn(['home', 'posts'])
+  postsMap: state.getIn(['home', 'posts'])
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   fetchHomepage: () => dispatch(homeActions.requestHome()),
 });
 
+
 class HomeComponent extends React.Component<HomeProperties, any> {
-  constructor(props: any) {
-    super(props)
-  }
+    shouldComponentUpdate(nextProps: HomeProperties) {
+         return this.props.postsMap !== nextProps.postsMap;
+    }
   componentWillMount() {
     this.props.fetchHomepage();
   }
@@ -29,7 +30,8 @@ class HomeComponent extends React.Component<HomeProperties, any> {
       return <Spinner text={'loading'}/>
     }
 
-    const posts = this.props.home_posts.toJS() as Post[]; //try to get away from .toJS. also the "as" is not necessary
+    const posts = this.props.postsMap.toJS() as Post[]; 
+    //try to get away from .toJS for perf. reasons. also the "as" is not necessary but is more readable...
     
     return (
       <div>
@@ -39,4 +41,4 @@ class HomeComponent extends React.Component<HomeProperties, any> {
   }
 }
 
-export default connect(matchStateToProps, mapDispatchToProps)(HomeComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

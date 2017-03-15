@@ -1,5 +1,6 @@
 import * as Immutable from 'immutable';
 import * as actionTypes from './action-types';
+import { ImmutableMap } from '../../types'
 
 //add other actiontypes separated by a pipe as necessary
 type HomeAction = actionTypes.FetchingAction | actionTypes.SyncAction; 
@@ -10,8 +11,8 @@ const initialState =
 		posts: null,
 	});
 
-export default function(state: Immutable.Map<string, any> = initialState,
- action: HomeAction) : Immutable.Map<string, any> {
+export default function(state: ImmutableMap<any> = initialState,
+ action: HomeAction) : ImmutableMap<any> {
 	switch (action.type) {
 		case actionTypes.FETCHING:
 			return state.set('fetching', action.payload);
