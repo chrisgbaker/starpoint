@@ -1,4 +1,5 @@
 const path = require('path')
+const compression = require('compression')
 const express = require('express')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -24,12 +25,12 @@ if (isDev) {
     }
   })
   app.use(middleware)
+  app.use(compression({level: -1}))
   app.use(webpackHotMiddleware(compiler, { log: console.log }))
   app.get('*', function response (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'))
   })
-}
-else {
+} else {
   // don't know if i'll ever get here...
   // app.use(express.static(path.join(__dirname, '/dist')))
   // app.get('*', function response (req, res) {

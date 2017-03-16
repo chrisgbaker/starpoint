@@ -1,11 +1,9 @@
 import * as React from 'react';
 
-const AppWrapper = (routerAndChildren: any) => {
+const AppWrapper = (routerAndChildren: any) : JSX.Element => {
     return (
-        <div>
-            <div id="page-wrap">
-                {routerAndChildren.children}
-            </div>
+        <div id="app-wrapper">
+            {routerAndChildren.children}
         </div>
     );
 }

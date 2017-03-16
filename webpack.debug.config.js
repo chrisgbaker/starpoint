@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const path = require('path')
 const webpack = require('webpack')
@@ -23,14 +23,14 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.LoaderOptionsPlugin(
-      { 
-        options: { 
-          postcss: [autoprefixer({ browsers: ['last 2 versions'] })] 
-        } 
+      {
+        options: {
+          postcss: [autoprefixer({ browsers: ['last 2 versions'] })]
+        }
       })
   ],
   resolve: {
-    modules: [path.resolve('./src'),'node_modules'],
+    modules: [path.resolve('./src'), 'node_modules'],
     alias: {
       'app.js': 'app.debug.js', // Includes devtools
       'theme.scss': 'styles/theme.scss'
@@ -38,11 +38,11 @@ module.exports = {
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: ['.ts', '.tsx', '.js']
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: '#source-maps',
   module: {
-    rules:[
+    rules: [
       {
-          // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
         enforce: 'pre',
         test: /\.js$/,
         loader: 'source-map-loader'
@@ -51,7 +51,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: 'babel-loader'
           },
           {
             loader: 'ts-loader'
@@ -62,10 +62,10 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: 'babel-loader'
           }
         ]
-      }, { 
+      }, {
         test: /\.scss$/,
         use: [
           'style-loader',
@@ -74,8 +74,8 @@ module.exports = {
           'sass-loader'
         ]
       }, {
-         test: /\.(jpg)|(gif)|(png)$/,
-         loader: 'file-loader'
+        test: /\.(jpg)|(gif)|(png)$/,
+        loader: 'file-loader'
       }
     ]
   }
