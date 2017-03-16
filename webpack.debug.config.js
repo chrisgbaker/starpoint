@@ -12,7 +12,7 @@ module.exports = {
       'eventsource-polyfill', // necessary for hot reloading with IE
       'webpack-hot-middleware/client',
       'babel-polyfill', // Polyfill to create ES6 browser env
-      './src/index.tsx'
+      './src/index.js'
     ]
   },
   output: {
@@ -36,7 +36,7 @@ module.exports = {
       'theme.scss': 'styles/theme.scss'
     },
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.jsx', '.js']
   },
   devtool: '#source-maps',
   module: {
@@ -46,17 +46,6 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'source-map-loader'
-      }, {
-        test: /\.ts(x?)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader'
-          },
-          {
-            loader: 'ts-loader'
-          }
-        ]
       }, {
         test: /\.js$/,
         exclude: /node_modules/,

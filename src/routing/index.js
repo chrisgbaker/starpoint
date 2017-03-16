@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Router, Route, IndexRoute, browserHistory  } from 'react-router';
 import history from './history-instance';
 
@@ -15,6 +15,6 @@ const routes = (
 	</Route>
 );
 
-const Routing = () : JSX.Element => <Router history={ history } routes={ routes } />;
+const Routing = () => <Router history={ history } routes={ routes } />;
 
 export default Routing;

@@ -10,7 +10,7 @@ module.exports = {
   entry: {
     starpoint: [
       'babel-polyfill',
-      './src/index.tsx'
+      './src/index.js'
     ]
   },
   output: {
@@ -40,7 +40,7 @@ module.exports = {
   resolve: {
     modules: [path.resolve('./src'), 'node_modules'],
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.jsx', '.js']
   },
   devtool: false,
   module: {
@@ -50,16 +50,6 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'source-map-loader'
-      }, {
-        test: /\.ts(x?)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader'
-          }, {
-            loader: 'ts-loader'
-          }
-        ]
       }, {
         test: /\.js$/,
         exclude: /node_modules/,

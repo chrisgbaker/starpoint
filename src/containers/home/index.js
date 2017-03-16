@@ -1,24 +1,23 @@
-import * as React from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 
 import { actions as homeActions } from '../../data-models/home'
-import { HomeProperties, Post } from '../../types'
 
 import PostCarousel from '../../components/post-carousel'
 import Spinner from '../../components/spinner'
 
-const mapStateToProps = (state: any): any => ({
+const mapStateToProps = (state) => ({
   isLoading: state.getIn(['home', 'fetching']),
   postsMap: state.getIn(['home', 'posts'])
 });
 
-const mapDispatchToProps = (dispatch: Function) => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchHomepage: () => dispatch(homeActions.requestHome()),
 });
 
 
-class HomeComponent extends React.Component<HomeProperties, any> {
-    shouldComponentUpdate(nextProps: HomeProperties) {
+class HomeComponent extends React.Component {
+    shouldComponentUpdate(nextProps) {
          return this.props.postsMap !== nextProps.postsMap;
     }
   componentWillMount() {
@@ -30,7 +29,7 @@ class HomeComponent extends React.Component<HomeProperties, any> {
       return <Spinner text={'loading'}/>
     }
 
-    const posts = this.props.postsMap.toJS() as Post[]; 
+    const posts = this.props.postsMap.toJS(); 
     //try to get away from .toJS for perf. reasons. also the "as" is not necessary but is more readable...
     
     return (
