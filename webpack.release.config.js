@@ -21,7 +21,14 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         drop_debugger: true,
-        drop_console: true
+        drop_console: true,
+        sequences: true,
+        dead_code: true,
+        conditionals: true,
+        booleans: true,
+        unused: true,
+        if_return: true,
+        join_vars: true
       }
     }),
     new webpack.DefinePlugin({
