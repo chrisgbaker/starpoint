@@ -1,13 +1,15 @@
 import * as React from 'react'
+import {TestComponentProperties} from '../../types'
 
-export interface ITestComponentProps { message?: string; }
-
-export default class TestComponent extends React.Component<ITestComponentProps, any> {
+export default class TestComponent extends React.Component<TestComponentProperties, any> {
   constructor (props:any) {
     super(props)
   }
-  render () {
+  render () : JSX.Element {
     const { message = 'hi.' } = this.props; 
-    return <div>{ message }</div>
+    return (
+      <div>
+        { message }
+      </div>)
   }
 }

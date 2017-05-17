@@ -1,4 +1,5 @@
 import * as Immutable from 'immutable';
+import {RouteComponentProps} from 'react-router-dom'
 
 export interface ImmutableMap<T> extends Immutable.Map<string, T> { }; //tired of typing this everywhere...
 
@@ -24,4 +25,7 @@ interface Action<P, S> {
   meta?: any;
 }
 
+export interface TestComponentProperties extends RouteComponentProps<{}> { message?: string; }
+
 export default Action;
+

@@ -2,12 +2,12 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 
 import { actions as homeActions } from '../../data-models/home'
-import { HomeProperties, Post } from '../../types'
+import { HomeProperties, Post, ImmutableMap } from '../../types'
 
 import PostCarousel from '../../components/post-carousel'
 import Spinner from '../../components/spinner'
 
-const mapStateToProps = (state: any): any => ({
+const mapStateToProps = (state: ImmutableMap<HomeProperties>, ownProps?: any): any => ({
   isLoading: state.getIn(['home', 'fetching']),
   postsMap: state.getIn(['home', 'posts'])
 });

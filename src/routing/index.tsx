@@ -1,20 +1,15 @@
 import * as React from 'react';
-import { Router, Route, IndexRoute, browserHistory  } from 'react-router';
-import history from './history-instance';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import  AppWrapper from '../containers/app-wrapper'
+import TestComponent from '../components/test-component'
 import  Home from '../containers/home'
 
-import  TestComponent from '../components/test-component'
+const Router = () => 
+	<BrowserRouter>
+		<div>
+			<Route exact path="/" component={ Home } />
+			<Route  path="/beer" component={ TestComponent } />
+		</div>
+	</BrowserRouter>;
 
-
-const routes = (
-    <Route path="/" component={ AppWrapper }> 
-		<IndexRoute component={ Home } />
-		<Route path="beer" component={ TestComponent } />	
-	</Route>
-);
-
-const Routing = () : JSX.Element => <Router history={ history } routes={ routes } />;
-
-export default Routing;
+export default Router;
