@@ -1,7 +1,5 @@
-import * as Immutable from 'immutable';
-import {RouteComponentProps} from 'react-router-dom'
-
-export interface ImmutableMap<T> extends Immutable.Map<string, T> { }; //tired of typing this everywhere...
+import { RouteComponentProps } from 'react-router-dom'
+import { Record } from 'immutable';
 
 export interface Post {
   title: {
@@ -12,10 +10,31 @@ export interface Post {
   };
 }
 
+export type PostsStateParams = {
+  fetching: boolean;
+  posts: Post[];
+}
+
+export class PostsState extends Record({
+		fetching: null,
+		posts: null} as PostsStateParams ) implements PostsStateParams  {
+			
+			readonly fetching: boolean;
+			readonly posts: Post[];
+			
+			constructor(params?: PostsStateParams) {
+        params ? super(params) : super();
+			}
+			
+			with(values: PostsStateParams) {
+				return this.merge(values) as this;
+			}
+}
+
 export interface HomeProperties {
-  isLoading: number;
-  postsMap: ImmutableMap<Post>;
-  fetchHomepage(): void;
+  loaded: boolean;
+  posts: Post[];
+  fetchHomepage?(): void;
 }
 
 interface Action<P, S> {
