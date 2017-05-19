@@ -1,26 +1,29 @@
-import * as Immutable from 'immutable';
 import * as actionTypes from './action-types';
-import { ImmutableMap } from '../../types'
+import { HomeState } from '../../types'
 
 //add other actiontypes separated by a pipe as necessary
 type HomeAction = actionTypes.FetchingAction | actionTypes.SyncAction; 
 
-const initialState =
-	Immutable.Map({
-		fetching: null,
-		posts: null,
-	});
-
-export default function(state: ImmutableMap<any> = initialState,
- action: HomeAction) : ImmutableMap<any> {
+export default function(state: HomeState = new HomeState(), action: HomeAction) : HomeState {
 	switch (action.type) {
 		case actionTypes.FETCHING:
-			return state.set('fetching', action.payload);
+			const fetchingParams ={
+				fetching: action.payload, 
+				posts: state.get('posts') 
+			};
+			return new HomeState(fetchingParams);
+			//return state.with(newStateParams);
+			//return state.set("fetching", action.payload);
 		case actionTypes.SYNC:
-			return state.merge({
-				fetching: false,
-				posts: action.payload,
-			});
+		const syncParams ={
+				fetching: false, 
+				posts: action.payload
+			};
+			return new HomeState(syncParams);
+			// return state.with({
+			// 		fetching: false,
+			// 		posts: action.payload,
+			// 	});
 		default: return state;
 	}
 

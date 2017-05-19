@@ -35,6 +35,7 @@ export function requestHome() {
 				.then((resp: Response) => resp.ok ? resp.json() : reject(resp))
 				.then((posts: Post[]) => dispatch(sync(posts)) && resolve(this))
 				.catch((e) => {
+					debugger;
 					reject(new Error(e));
 					// an error handler for all .then(...) callbacks
 					// http://stackoverflow.com/questions/24662289/when-is-thensuccess-fail-considered-an-antipattern-for-promises

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Post, ImmutableMap } from '../../types'
+import { Post } from '../../types'
 
 //let's ignore those dangerouslySetInnerHTMLs for now...
 const iterateOverPosts = (post: Post, index: number) => {
