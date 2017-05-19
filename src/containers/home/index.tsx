@@ -2,14 +2,14 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 
 import { actions as homeActions } from '../../data-models/home'
-import { PostsState, HomeProperties, Post } from '../../types'
+import { HomeState, HomeProperties, Post } from '../../types'
 
 import PostCarousel from '../../components/post-carousel'
 import Spinner from '../../components/spinner'
 
-const mapStateToProps = (state: PostsState, ownProps? :any): any => ({
-  loaded: state.fetching,
-  posts: state.posts
+const mapStateToProps = (state: {home: HomeState}, ownProps? :any): any => ({
+  loaded: state.home.fetching === false,
+  posts: state.home.posts
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

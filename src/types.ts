@@ -10,23 +10,23 @@ export interface Post {
   };
 }
 
-export type PostsStateParams = {
+export type HomeStateParams = {
   fetching: boolean;
   posts: Post[];
 }
 
-export class PostsState extends Record({
+export class HomeState extends Record({
 		fetching: null,
-		posts: null} as PostsStateParams ) implements PostsStateParams  {
+		posts: null} as HomeStateParams ) implements HomeStateParams  {
 			
 			readonly fetching: boolean;
 			readonly posts: Post[];
 			
-			constructor(params?: PostsStateParams) {
+			constructor(params?: HomeStateParams) {
         params ? super(params) : super();
 			}
 			
-			with(values: PostsStateParams) {
+			with(values: HomeStateParams) {
 				return this.merge(values) as this;
 			}
 }
@@ -48,3 +48,11 @@ export interface TestComponentProperties extends RouteComponentProps<{}> { messa
 
 export default Action;
 
+// The state of the entire application
+// I'm not 100% sure this is the best way to do this,
+// but with Immutable.Record you need to have the 
+// root structure of your Record pre-defined, unlike 
+// Immutable.Map, where you can just add a new key/value
+export class ApplicationState extends Record({
+  home: undefined as HomeState
+}){ };
